@@ -1,4 +1,4 @@
-# Normtest
+# normtestPY
 
 This is a python package that tests for normality in your data!
 
