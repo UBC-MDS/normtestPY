@@ -4,7 +4,7 @@ This is a python package that tests for normality in your data!
 
 Functions:
 1. make_qqplot()
-    - description: this function will read in data and will create a QQ-plot for each continuous variable in the data. It will output a dictionary of plot objects and print them to screen as default. The user will have the option of not printing plots.
+    - description: this function will read in data and will create a QQ-plot for each continuous variable in the data. It will output a dictionary of plot objects and print them to screen as default (the user will have the option of not printing plots).
     - input: dataframe, series, list, or array
     - output: list of plots
 2. shapiro_wilk()
