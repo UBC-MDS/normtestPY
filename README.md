@@ -1,4 +1,5 @@
 # normtestPY
+By Coste Shuster, Sylvia Lee, Richie Zitomer
 
 This is a python package that tests for normality in your data!
 
