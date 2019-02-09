@@ -8,6 +8,6 @@ The function creates QQ-plot for each continuous variable in the data
 '''
 
 import pytest
-import normtestPY
+from normtestPY.make_qqplot import make_qqplot
 
 # Unit Tests
