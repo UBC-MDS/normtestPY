@@ -1,4 +1,4 @@
-def params_mle.py(data):
+def params_mle(data):
     '''
     Function: Fit data to a Guassian distribution with Maximum Likelihood
               Estimation (MLE)
