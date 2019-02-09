@@ -10,6 +10,6 @@ Output: DATAFRAME where the first row contains the estimated means and
 '''
 
 import pytest
-from normtestPY.params_mle import params_mls
+from normtestPY.params_mle import params_mle
 
 # Unit Tests
