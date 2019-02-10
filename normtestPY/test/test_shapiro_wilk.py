@@ -22,30 +22,30 @@ data_df = pd.DataFrame({'a': [1, 2, 3], 'b': [2, 3, 4]})
 data_df2 = pd.DataFrame({'a': ["ab", "cd", "ef"], 'b': ["TRUE", "FALSE", "TRUE"]})
 
 # Unit Tests
-def output_type():
+def test_output_type():
     """Check that output is a tuple"""
     stats = shapiro_wilk(data_df)
     assert type(stats) == tuple
 
 
-def output_tuple_length():
+def test_output_tuple_length():
     """check that length of output is two since the tuple always has 2 lists in it"""
     stats = shapiro_wilk(data_df)
     assert len(stats) == 2
 
 
-def output_list_length():
+def test_output_list_length():
     """check that the length of the first list is as <= amount of columns in pd.dataframe"""
     stats_1 = shapiro_wilk(data_df)[0]
     assert len(stats_1) <= data_df.shape[1]
 
-def output_lists_equal():
+def test_output_lists_equal():
     """check that the length of the first list is equal to the output of the second list"""
     stats = shapiro_wilk(data)
     assert len(stats[0]) == len(stats[1])
 
 
-def input_type():
+def test_input_type():
     """check that the function returns TypeError if the dataframe has no continuous variables"""
     with pytest.raises(TypeError):
         shapiro_wilk(data_df2)
