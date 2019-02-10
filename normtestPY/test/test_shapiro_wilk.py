@@ -50,7 +50,12 @@ def test_input_type():
     with pytest.raises(TypeError):
         shapiro_wilk(data_df2)
 
+<<<<<<< HEAD
 def calculation_test():
     """check that the shapiro-wilk test statistic is correctly calculated because p-value should be > 0.05"""
+=======
+def test_calculation_test():
+    """check that the shapiro-wilk test statistic is correctly calculated because p-value should be < 0.05"""
+>>>>>>> upstream/master
     norm_values = np.random.normal(5, 2, 100)
     assert shapiro_wilk(norm_values)[1] > 0.05
