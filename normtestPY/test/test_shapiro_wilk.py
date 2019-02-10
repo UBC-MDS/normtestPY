@@ -51,6 +51,6 @@ def input_type():
         shapiro_wilk(data_df2)
 
 def calculation_test():
-    """check that the shapiro-wilk test statistic is correctly calculated because p-value should be < 0.05"""
+    """check that the shapiro-wilk test statistic is correctly calculated because p-value should be > 0.05"""
     norm_values = np.random.normal(5, 2, 100)
-    assert shapiro_wilk(norm_values)[1] <= 0.05
+    assert shapiro_wilk(norm_values)[1] > 0.05
