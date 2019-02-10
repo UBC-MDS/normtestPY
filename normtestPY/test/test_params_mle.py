@@ -8,6 +8,8 @@ Output: DATAFRAME where the first row contains the estimated means and
         the second row contains the estimated variance, and the columns
         present the original variables in the data
 '''
+
+# Dependencies
 import pytest
 import pandas as pd
 import numpy as np
@@ -24,13 +26,12 @@ expected = pd.DataFrame({"var1": [1/4, (11/16)**0.5], "var2": [-1/4, (11/16)**0.
 
 # Unit tests
 def test_params_mle_calc():
-    results = params_mle(dummy)
-    assert np.allclose(results, expected)
+    assert np.allclose(params_mle(dummy), expected)
     assert np.allclose(params_mle(series_type), expected["var1"])
     assert np.allclose(params_mle(matrix_type), expected)
     assert np.allclose(params_mle(list_2d_type), expected)
 
-def test_valid_non_df_inputs():
+def test_output_type():
     assert isinstance(params_mle(dummy), pd.DataFrame)
     assert isinstance(params_mle(matrix_type), pd.DataFrame)
     assert isinstance(params_mle(list_2d_type), pd.DataFrame)
