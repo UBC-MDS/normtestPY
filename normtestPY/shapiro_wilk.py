@@ -1,15 +1,23 @@
 def shapiro_wilk(data):
     '''
-    Function: Conduct the Shapiro-Wilk test for every continuous
-              variable in the data to test against normality
+    Conduct the Shapiro-Wilk test for every continuous variable in the data to test for normality.
 
-    Input:    DATAFRAME where data for each continous variable is in its
-              respective column
+    Parameters
+    ----------
+    data : pandas dataframe
+        data to be tested for normality
 
-    Output:   LISTS where the first list contains the test statistics and the
-              second list contains the p-values in the order of the continuous
-              variables in the dataframe
+    Returns
+    -------
+    statistic : list
+        test statistics for each continuous variable in the dataframe, by order in which they appear in the dataframe
+    p : list
+        second list contains the p-values of the test statisticas, by order in which they appear in the dataframe
+
+    Examples
+    --------
     '''
+
     print("shapiro_wilk - empty function")
 
     return()
