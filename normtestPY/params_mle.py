@@ -4,18 +4,22 @@ def params_mle(data):
 
     Parameters
     ----------
-    DATAFRAME where data for each continous variable is in its
-              respective column
+    data : ndarray, list, dict, or DataFrame
+        Data to be tested for normality
 
     Returns
     -------
-    DATAFRAME where the first row contains the estimated means and
-              the second row contains the estimated variance, and the columns
-              present the original variables in the data
+    mle_params : Dataframe
+        Dataframe with the first row containing the estimated means and
+        the second row containing the estimated variance. The columns
+        present the original variables in the data
 
     Examples
     --------
+    iris_data = pd.DataFrame({"length": [1,2,3,4], "width": [5,6,7,8])
+    make_qqplot(iris_data)
     '''
+    
     print("params_mle - empty function")
 
     return()
