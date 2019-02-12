@@ -4,18 +4,20 @@ def shapiro_wilk(data):
 
     Parameters
     ----------
-    data : pandas dataframe
-        data to be tested for normality
+    data : ndarray, list, dict, or DataFrame
+        Data to be tested for normality
 
     Returns
     -------
     statistic : list
-        test statistics for each continuous variable in the dataframe, by order in which they appear in the dataframe
+        Test statistics for each continuous variable in the dataframe, by order in which they appear in the dataframe
     p : list
-        second list contains the p-values of the test statisticas, by order in which they appear in the dataframe
+        Second list contains the p-values of the test statisticas, by order in which they appear in the dataframe
 
     Examples
     --------
+    iris_data = pd.DataFrame({"length": [1,2,3,4], "width": [5,6,7,8])
+    make_qqplot(iris_data)
     '''
 
     print("shapiro_wilk - empty function")
