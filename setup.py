@@ -8,5 +8,5 @@ setup(
     license='MIT',
     description='This is a Python package that tests your data for normality!',
     url='https://github.com/UBC-MDS/normtestPY',
-    install_requires=[]
+    install_requires=['numpy', 'pandas']
 )
