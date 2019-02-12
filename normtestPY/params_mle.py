@@ -47,6 +47,8 @@ def params_mle(data):
 
     # Retrieve size of data
     n_obs = data.shape[0]
+    if (n_obs == 0):
+        raise ZeroDivisionError
 
     ## Calculations
     ## =============
@@ -61,4 +63,5 @@ def params_mle(data):
     ## Return results
     ## ==============
     mle_params = pd.DataFrame(np.vstack((mu, variance)), index = ["Mean", "Variance"], columns = var_names)
+
     return(mle_params)
