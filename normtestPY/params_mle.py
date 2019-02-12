@@ -1,3 +1,7 @@
+# Dependencies
+import pandas as pd
+import numpy as np
+
 def params_mle(data):
     '''
     Fit data to a Guassian distribution with Maximum Likelihood Estimation (MLE)
@@ -16,7 +20,7 @@ def params_mle(data):
     Examples
     --------
     '''
-    
+
 ## PREPROCESSING
     ## =============
 
