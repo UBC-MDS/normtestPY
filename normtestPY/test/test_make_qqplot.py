@@ -12,6 +12,8 @@ Assertion errors if tests fail
 #Dependencies
 import numpy as np
 import pandas as pd
+import matplotlib
+
 from normtestPY.make_qqplot import make_qqplot
 
 # Sample data
@@ -55,7 +57,7 @@ def test_plots():
     """Check that each element is a plot"""
     plots = make_qqplot(data)
     for key in plots.keys():
-        assert isinstance(plots[key][0], matplotlib.lines.Line2D)
+        assert isinstance(plots[key], matplotlib.figure.Figure)
 
 def test_key_names_array():
     """Check key names for an array-like object"""
