@@ -1,19 +1,18 @@
 '''
 This script tests the function from make_qqplot.py
 
-The function creates QQ-plot for each continuous variable in the data
-# Input:  DATAFRAME (where data for each continous variable is in its
-          respective column), LIST, ARRAY, or SERIES
-# Output: DICTIONARY of plots where the keys are the column name (if passed a dataframe or series) or are the index
-  (if passed a list or array)
+Parameters
+----------
+None
+
+Returns
+-------
+Assertion errors if tests fail
 '''
-
-
+#Dependencies
 import numpy as np
 import pandas as pd
-
 from normtestPY.make_qqplot import make_qqplot
-
 
 # Sample data
 data = [1, 2, 3]
@@ -21,7 +20,7 @@ data_array = np.array([[1, 2], [3, 4]])
 data_series = pd.Series({'a':[1,2,3]})
 data_df = pd.DataFrame({'a': [1, 2, 3], 'b': [2, 3, 4]})
 
-
+# Unit tests
 def test_output():
     """Check that output is a dict."""
     plots = make_qqplot(data)
@@ -70,4 +69,3 @@ def test_key_names_df():
     plots = make_qqplot(data_df)
     for key in plots.keys():
         assert key in data_df.columns
-
