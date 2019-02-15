@@ -51,7 +51,7 @@ def params_mle(data):
 
     # Retrieve size of data
     n_obs = data.shape[0]
-    if (n_obs == 0):
+    if n_obs == 0:
         raise ZeroDivisionError
 
     # Exception handling if array element is not numeric
