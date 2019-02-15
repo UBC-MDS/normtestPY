@@ -22,33 +22,41 @@ def params_mle(data):
     '''
 
 ## PREPROCESSING
-    ## =============
-
-    # Set default column names as indexes
-    try: # 2D data
-        n_var = data.shape[1]
-        var_names = range(n_var)
-    except: # 1D data
-        var_names = [0]
+## =============
 
     # Address different input types
-    if isinstance(data, pd.DataFrame):
+    if isinstance(data, np.ndarray):
+        if len(data.shape) == 1:
+            var_names = [0]
+        else:
+            var_names = range(data.shape[1])
+
+    elif isinstance(data, pd.DataFrame):
         var_names = list(data)
         data = np.array(data)
 
     elif isinstance(data, pd.Series):
-        if data.name != None:
+        if data.name is not None:
             var_names = [data.name]
+        else:
+            var_names = [0]
         data = np.array(data)
 
     elif isinstance(data, list):
         var_names = range(len(data))
         data = np.transpose(np.array(data))
 
+    else:
+        raise TypeError
+
     # Retrieve size of data
     n_obs = data.shape[0]
     if (n_obs == 0):
         raise ZeroDivisionError
+
+    # Exception handling if array element is not numeric
+    if data.dtype.kind not in ["i", "u", "f", "c"]:
+        raise TypeError
 
     ## Calculations
     ## =============
@@ -58,10 +66,9 @@ def params_mle(data):
 
     # Calculate sigma estimates
     variance = np.sum((data - mu)**2, axis = 0)/n_obs
-    sigma = variance**(1/2)
 
     ## Return results
     ## ==============
     mle_params = pd.DataFrame(np.vstack((mu, variance)), index = ["Mean", "Variance"], columns = var_names)
 
-    return(mle_params)
+    return mle_params
