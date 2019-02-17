@@ -45,17 +45,12 @@ def test_output_lists_equal():
     stats = shapiro_wilk(data)
     assert len(stats[0]) == len(stats[1])
 
-def test_meaningless_output():
+def test_meaningless_input():
     """check that meaningless input isn't prcoessed"""
     with pytest.raises(TypeError):
         shapiro_wilk(data_meaningless1)
     with pytest.raises(TypeError):
         shapiro_wilk(data_meaningless2)
-
-def test_input_type():
-    """check that the function returns TypeError if the dataframe has no continuous variables"""
-    with pytest.raises(TypeError):
-        shapiro_wilk(data_df2)
 
 def calculation_test():
     """check that the shapiro-wilk test statistic is correctly calculated because p-value should be > 0.05"""
