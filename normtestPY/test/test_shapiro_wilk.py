@@ -19,7 +19,8 @@ from normtestPY.shapiro_wilk import shapiro_wilk
 # Sample data
 data = [1, 2, 3]
 data_df = pd.DataFrame({'a': [1, 2, 3], 'b': [2, 3, 4]})
-data_df2 = pd.DataFrame({'a': ["ab", "cd", "ef"], 'b': ["TRUE", "FALSE", "TRUE"]})
+data_meaningless1 = pd.DataFrame({'a': ["ab", "cd", "ef"]})
+data_meaningless2 = pd.DataFrame({'b': ["TRUE", "FALSE", "TRUE"]})
 
 # Unit Tests
 def test_output_type():
@@ -44,6 +45,12 @@ def test_output_lists_equal():
     stats = shapiro_wilk(data)
     assert len(stats[0]) == len(stats[1])
 
+def test_meaningless_output():
+    """check that meaningless input isn't prcoessed"""
+    with pytest.raises(TypeError):
+        shapiro_wilk(data_meaningless1)
+    with pytest.raises(TypeError):
+        shapiro_wilk(data_meaningless2)
 
 def test_input_type():
     """check that the function returns TypeError if the dataframe has no continuous variables"""
