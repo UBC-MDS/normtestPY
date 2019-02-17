@@ -12,12 +12,14 @@ Assertion errors if tests fail
 #Dependencies
 import numpy as np
 import pandas as pd
+import matplotlib
+
 from normtestPY.make_qqplot import make_qqplot
 
 # Sample data
 data = [1, 2, 3]
 data_array = np.array([[1, 2], [3, 4]])
-data_series = pd.Series({'a':[1,2,3]})
+data_series = pd.Series({'a':1,'b':2,'c':3})
 data_df = pd.DataFrame({'a': [1, 2, 3], 'b': [2, 3, 4]})
 
 # Unit tests
@@ -55,7 +57,7 @@ def test_plots():
     """Check that each element is a plot"""
     plots = make_qqplot(data)
     for key in plots.keys():
-        assert isinstance(plots[key][0], matplotlib.lines.Line2D)
+        assert isinstance(plots[key], matplotlib.figure.Figure)
 
 def test_key_names_array():
     """Check key names for an array-like object"""
