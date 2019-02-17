@@ -50,7 +50,7 @@ def test_output_list_length():
 
 def test_output_lists_equal():
     """check that the length of the first list is equal to the output of the second list"""
-    stats = shapiro_wilk(data_list3)
+    stats = shapiro_wilk(data_list2)
     assert len(stats[0]) == len(stats[1])
 
 def test_meaningless_input():
