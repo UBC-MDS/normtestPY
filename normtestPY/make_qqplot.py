@@ -44,6 +44,7 @@ def make_qqplot(data, print_plots = True):
         else:
             var_names = [0]
         data = np.array(data)
+        data = data[:, None]
 
     elif isinstance(data, list):
         var_names = range(len(data))
