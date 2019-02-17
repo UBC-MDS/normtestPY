@@ -21,7 +21,7 @@ def params_mle(data):
     Examples
     --------
     iris_data = pd.DataFrame({"length": [1,2,3,4], "width": [5,6,7,8])
-    make_qqplot(iris_data)
+    params_mle(iris_data)
     '''
 
 ## PREPROCESSING
