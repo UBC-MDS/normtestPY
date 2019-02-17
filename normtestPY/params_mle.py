@@ -46,7 +46,10 @@ def params_mle(data):
         data = np.array(data)
 
     elif isinstance(data, list):
-        var_names = range(len(data))
+        if type(data[0]) in (float,int):
+            var_names = [0]
+        else:
+            var_names = range(len(data))
         data = np.transpose(np.array(data))
 
     else:

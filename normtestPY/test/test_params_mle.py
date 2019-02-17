@@ -41,7 +41,7 @@ def test_output_type():
 def test_empty_inputs():
     with pytest.raises(ZeroDivisionError):
         params_mle(pd.DataFrame({"var1": [], "var2": []}))
-    with pytest.raises(ZeroDivisionError):
+    with pytest.raises(IndexError):
         params_mle(list())
 
 def test_non_numeric_inputs():
