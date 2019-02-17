@@ -47,13 +47,9 @@ The package has the following dependencies:
 
 The `SciPy.stats` package has a Shapiro-Wilk test function named [`shapiro()`](https://docs.scipy.org/doc/scipy-0.19.1/reference/generated/scipy.stats.shapiro.html), it takes in an array of sample data and returns the test statistic as a float and the p-value as a float and returns both as a tuple. For Q-Q plots in python, there is a package named `statsmodels` and within it - [`statsmodels.graphics.gofplots.qqplot()`](https://www.statsmodels.org/dev/generated/statsmodels.graphics.gofplots.qqplot.html) - there is a function that takes in 1D array data and creates a `matplotlib` figure. It seems that there is no official PIP or Conda package that provides MLE estimation as a standalone method. In the present, MLE operation requires users to write a self-defined function with the help of [`optimize.minimize()`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html) from `SciPy`.
 
-<<<<<<< HEAD
 Two functions from this `normtestPY` package could be found in other python packages, while the `params_mle()` function does not seem to have an official substitute. 'normtestPY' may fit into the Python ecosystem by providing convenience to statisticians whom often need to deal with normality assumptions and estimations. This package is designed to eliminate the hassle to import functions from different packages in which the users may or may not have.
 
 References:
 
 1. [Real Statistics - Shapiro-Wilk Expanded Test](http://www.real-statistics.com/tests-normality-and-symmetry/statistical-tests-normality-symmetry/shapiro-wilk-expanded-test/)
 2. [Engineering Statistics Handbook - Anderson Darling and Shaprio-Wilk tests](https://www.itl.nist.gov/div898/handbook/prc/section2/prc213.htm)
-=======
-Two functions from this `normtestPY` package could be found in other python packages, while the `params_mle()` function does not seem to have an official substitute. 'normtestPY' may fit into the Python ecosystem by providing convenience to statisticians whom often need to deal with normality assumptions and estimations. This package eliminates the hassle of importing functions from different packages which the users may or may not have.
->>>>>>> bf3de26b7b2575dac5aa98f56142cd58e4c3c093
