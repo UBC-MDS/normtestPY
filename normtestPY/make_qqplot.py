@@ -48,7 +48,10 @@ def make_qqplot(data, print_plots = True):
         data = data[:, None]
 
     elif isinstance(data, list):
-        var_names = range(len(data))
+        if type(data[0]) in (float,int):
+            var_names = [0]
+        else:
+            var_names = range(len(data))
         data = np.transpose(np.array(data))
         data = data[:,None]
 
