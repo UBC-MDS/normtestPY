@@ -17,10 +17,10 @@ def shapiro_wilk(data):
 
     Returns
     -------
-    statistic : list
+    shapiro_stats : list
         Test statistics for each continuous variable in the dataframe, by order in which they appear in the dataframe
-    p : list
-        Second list contains the p-values of the test statisticas, by order in which they appear in the dataframe
+    p_values : list
+        Second list contains the p-values of the test statistics, by order in which they appear in the dataframe
 
     Examples
     --------
@@ -28,8 +28,8 @@ def shapiro_wilk(data):
     shapiro_wilk(iris_data)
     '''
 
-## PREPROCESSING
-## =============
+    ## PREPROCESSING
+    ## =============
 
     # Address different input types
     if isinstance(data, np.ndarray):
@@ -38,11 +38,10 @@ def shapiro_wilk(data):
         else:
             n_var = data.shape[1]
             var_names = range(n_var)
-
     elif isinstance(data, pd.DataFrame):
-        var_names = list(data)
+        n_var = data.shape[1]
+        var_names = range(n_var)
         data = np.array(data)
-
     elif isinstance(data, pd.Series):
         if data.name is not None:
             var_names = [data.name]
@@ -50,12 +49,13 @@ def shapiro_wilk(data):
             var_names = [0]
         data = np.array(data)
         data = data[:, None]
-
     elif isinstance(data, list):
-        var_names = range(len(data))
-        data = np.transpose(np.array(data))
-        data = data[:,None]
-
+        if type(data[0]) in (float,int):
+            var_names = [0]
+        else:
+            var_names = range(len(data))
+        data = np.array(data)
+        data = data[:, None]
     else:
         raise TypeError
 
@@ -63,14 +63,8 @@ def shapiro_wilk(data):
     if data.dtype.kind not in ["i", "u", "f", "c"]:
         raise TypeError
 
-    # check length of x
-    if data < 3:
-        raise ValueError ("Must have at least 3 observation to calculate this statistic")
-    elif n > 5000:
-        raise ValueError ("Statistic may be inaccurate when > 5000 observations")
-
     # create lists to be returned
-    shapiro_values = list()
+    shapiro_stats = list()
     p_values = list()
 
     ## Calculations
@@ -78,8 +72,14 @@ def shapiro_wilk(data):
     ## algorithm reference: http://www.real-statistics.com/tests-normality-and-symmetry/statistical-tests-normality-symmetry/shapiro-wilk-expanded-test/
 
     for i in var_names:
-        x = data[i]
+        x = data[:, i]
         n = len(x)
+
+        # cannot perform shapiro-wilk test if n <3 or n>5000, raise
+        if x.size < 3:
+            raise ValueError ("Must have at least 3 observations in each dataset to calculate this statistic")
+        elif x.size > 5000:
+            raise ValueError ("Statistic is inaccurate when > 5000 observations. Please split data randomly.")
 
         #### let W be the Shapiro-Wilk test statistic
         #### W = b^2/SSE
@@ -122,7 +122,7 @@ def shapiro_wilk(data):
         p = 1-norm.cdf(z)
 
         #### append W and p to lists
-        shapiro_values.append(W)
+        shapiro_stats.append(W)
         p_values.append(p)
 
-        return shapiro_values, p_values
+    return shapiro_stats, p_values
