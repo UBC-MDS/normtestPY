@@ -9,7 +9,8 @@ def make_qqplot(data, print_plots = True):
     Parameters
     -------
     data : ndarray, list, dict, or DataFrame
-        Data to be tested for normality
+        Data to be tested for normality. ALL data must be numeric or the
+        function will raise a TypeError.
 
     print_plots: Boolean
         Toggle whether or not the plots are interactively printed out while
