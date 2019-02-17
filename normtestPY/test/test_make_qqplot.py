@@ -19,7 +19,7 @@ from normtestPY.make_qqplot import make_qqplot
 # Sample data
 data = [1, 2, 3]
 data_array = np.array([[1, 2], [3, 4]])
-data_series = pd.Series({'a':[1,2,3]})
+data_series = pd.Series({'a':1,'b':2,'c':3})
 data_df = pd.DataFrame({'a': [1, 2, 3], 'b': [2, 3, 4]})
 
 # Unit tests
