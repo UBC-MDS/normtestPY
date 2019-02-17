@@ -51,7 +51,6 @@ def params_mle(data):
         else:
             var_names = range(len(data))
         data = np.transpose(np.array(data))
-        data = data[:,None]
 
     else:
         raise TypeError
@@ -79,9 +78,3 @@ def params_mle(data):
     mle_params = pd.DataFrame(np.vstack((mu, variance)), index = ["Mean", "Variance"], columns = var_names)
 
     return mle_params
-
-dummy = pd.DataFrame({"var1": [0,1,1,-1], "var2": [-1, -1, 0, 1]})
-series_type = (dummy["var1"])
-matrix_type = np.array(dummy)
-list_2d_type = list([list(dummy["var1"]), list(dummy["var2"])])
-params_mle([1,2,3,4])
