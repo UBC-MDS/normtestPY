@@ -24,6 +24,8 @@ The package has the following dependencies:
 - numpy
 - pandas
 - matplotlib
+- scipy
+- math
 
 ### Package functions:  
 1. `make_qqplot()`
