@@ -13,6 +13,18 @@ Analysts use graphical and statistical methods to test whether sample data came 
 
 This package will test your data for normality using a graphical and a statistical method. As a graphical method, this package lets you see a quantile-quantile plots (Q-Q plot) in order for you to visualize whether the data closely approximates a straight line - thereby indicating it is normally distributed. As a statistical method, this package lets you calculate the Shapiro-Wilk test score along with the corresponding p-value. The Shapiro-Wilk test provides better power than most other statistical normality tests, as long as **most of the values are unique** [<sup>1</sup>](https://www.graphpad.com/guides/prism/7/statistics/index.htm?stat_choosing_a_normality_test.htm). This package will also derive the parameters that would fit your data to a normal distribution using maximum likelihood estimation.
 
+
+#### Example
+```{python}
+from normtestPY.normtestPY.params_mle import params_mle
+from normtestPY.normtestPY.shapiro_wilk import shapiro_wilk
+from normtestPY.normtestPY.make_qqplot import make_qqplot
+
+data = [1,2,3,20] # Very simple example of a very non-normal dataset
+```
+![](example_usage.png)
+
+
 ### Installation Instructions
 In order to install the package, run the following command from terminal:
 ```{bash}
