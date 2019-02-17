@@ -18,7 +18,8 @@ def shapiro_wilk(data):
     Returns
     -------
     shapiro_stats : list
-        Test statistics for each continuous variable in the dataframe, by order in which they appear in the dataframe
+        Test statistics for each continuous variable in the dataframe, by order in which they appear in the dataframe.
+        If Shapiro-Wilk statistic evaluates > 1, we set it to 0.9999 to protect the math evaluation of the z-score - data will still be appropriately evaluated as normally distributed.
     p_values : list
         Second list contains the p-values of the test statistics, by order in which they appear in the dataframe
 
@@ -118,6 +119,13 @@ def shapiro_wilk(data):
         mu = 0.0038915*(np.log(n)**3) - 0.083751*(np.log(n)**2) - 0.31082*(np.log(n)) - 1.5861
         exponent = 0.0030302*(np.log(n)**2) - 0.082676*(np.log(n)) - 0.4803
         sigma = exp(exponent)
+
+        #### if W >= 1 protect ouput by making W = 0.99
+        #### W >=1 means the data is normal in any case so for user won't change outcome
+        if W > 1:
+            W = 0.9999
+
+        #### calculate z-score and p-value
         z = (np.log(1-W)-mu)/sigma
         p = 1-norm.cdf(z)
 

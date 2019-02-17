@@ -17,16 +17,24 @@ import pandas as pd
 from normtestPY.shapiro_wilk import shapiro_wilk
 
 # Sample data
-data = [1, 2, 3]
-data_df = pd.DataFrame({'a': [1, 2, 3], 'b': [2, 3, 4]})
+data_df = pd.DataFrame({'data' : [41.5,38.7,44.5,43.8,46.0,39.4, 40.6, 42.7],
+              'data2' : [65,63,86,70,74,35,68,45]})
+data_list1 = [41.5,38.7,44.5,43.8,46.0,39.4, 40.6, 42.7]
+data_list2 = [1, 2, 3]
+data_ndarray = np.array([[41.5,38.7,44.5,43.8,46.0,39.4, 40.6, 42.7],
+                      [65,63,86,70,74,35,68,45]])
+data_ndarray = data_ndarray.T
+data_series = pd.Series([41.5,38.7,44.5,43.8,46.0])
 data_meaningless1 = pd.DataFrame({'a': ["ab", "cd", "ef"]})
 data_meaningless2 = pd.DataFrame({'b': ["TRUE", "FALSE", "TRUE"]})
 
 # Unit Tests
-def test_output_type():
-    """Check that output is a tuple"""
-    stats = shapiro_wilk(data_df)
-    assert type(stats) == tuple
+def test_output_and_input_type():
+    """Check that output is a tuple for all possible inputs"""
+    assert type(shapiro_wilk(data_df)) == tuple
+    assert type(shapiro_wilk(data_list1)) == tuple
+    assert type(shapiro_wilk(data_ndarray)) == tuple
+    assert type(shapiro_wilk(data_series)) == tuple
 
 
 def test_output_tuple_length():
@@ -42,7 +50,7 @@ def test_output_list_length():
 
 def test_output_lists_equal():
     """check that the length of the first list is equal to the output of the second list"""
-    stats = shapiro_wilk(data)
+    stats = shapiro_wilk(data_list2)
     assert len(stats[0]) == len(stats[1])
 
 def test_meaningless_input():
