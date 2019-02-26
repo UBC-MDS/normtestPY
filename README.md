@@ -16,9 +16,9 @@ This package will test your data for normality using a graphical and a statistic
 
 #### Example
 ```{python}
-from normtestPY.normtestPY.params_mle import params_mle
-from normtestPY.normtestPY.shapiro_wilk import shapiro_wilk
-from normtestPY.normtestPY.make_qqplot import make_qqplot
+from normtestPY.params_mle import params_mle
+from normtestPY.shapiro_wilk import shapiro_wilk
+from normtestPY.make_qqplot import make_qqplot
 
 data = [1,2,3,20] # Very simple example of a very non-normal dataset
 ```
