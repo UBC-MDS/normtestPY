@@ -40,7 +40,7 @@ def test_output_and_input_type():
 def test_bad_inputs_string():
     """Check that an error is thrown from non-numeric inputs"""
     try:
-        shapriro_wilk('a',False)
+        shapriro_wilk(data_meaningless1)
     except TypeError:
         return True
     raise TypeError
