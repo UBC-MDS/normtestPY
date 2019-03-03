@@ -36,6 +36,7 @@ def shapiro_wilk(data):
     if isinstance(data, np.ndarray):
         if len(data.shape) == 1:
             var_names = [0]
+            data = data.reshape(-1,1)
         else:
             n_var = data.shape[1]
             var_names = range(n_var)
@@ -107,8 +108,8 @@ def shapiro_wilk(data):
         a[1] = -a[n-2]
         a[0] = -a[n-1]
         e = (M-(2*(m[n-1]**2))-(2*(m[n-2]**2)))/(1-(2*(a[n-1]**2))-(2*(a[n-2]**2)))
-        if n-4 > 0:
-            for i in range(2,n-2):
+        if n > 4:
+            for i in range(2 ,n-2):
                 a[i] = m[i]/(e**0.5)
 
         #### step 6: calculate W (Shapiro-Wilk) statistic
