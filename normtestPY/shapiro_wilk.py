@@ -76,10 +76,10 @@ def shapiro_wilk(data):
         x = data[:, i]
         n = len(x)
 
-        # cannot perform shapiro-wilk test if n <3 or n>5000, raise
-        if x.size < 3:
-            raise ValueError ("Must have at least 3 observations in each dataset to calculate this statistic")
-        elif x.size > 5000:
+        # cannot perform shapiro-wilk test if n<=3 or n>5000, raise
+        if n <= 3:
+            raise ValueError ("Must have greater than 3 observations in each dataset to calculate this statistic")
+        elif n > 5000:
             raise ValueError ("Statistic is inaccurate when > 5000 observations. Please split data randomly.")
 
         #### let W be the Shapiro-Wilk test statistic
@@ -104,11 +104,12 @@ def shapiro_wilk(data):
         a = np.zeros(n)
         a[n-1] = -(2.706056*(u**5)) + (4.434685*(u**4)) - (2.071190*(u**3)) - (0.147981*(u**2)) + (0.221157*u) + (m[n-1]*(M**-0.5))
         a[n-2] = -(3.582633*(u**5)) + (5.682633*(u**4)) - (1.752461*(u**3)) - (0.293762*(u**2)) + (0.042981*u) + (m[n-2]*(M**-0.5))
-        e = (M-(2*(m[n-1]**2))-(2*(m[n-2]**2)))/(1-(2*(a[n-1]**2))-(2*(a[n-2]**2)))
-        for i in range(2,n-2):
-            a[i] = m[i]/(e**0.5)
         a[1] = -a[n-2]
         a[0] = -a[n-1]
+        e = (M-(2*(m[n-1]**2))-(2*(m[n-2]**2)))/(1-(2*(a[n-1]**2))-(2*(a[n-2]**2)))
+        if n-4 > 0:
+            for i in range(2,n-2):
+                a[i] = m[i]/(e**0.5)
 
         #### step 6: calculate W (Shapiro-Wilk) statistic
         b = np.sum(a*y)
@@ -118,7 +119,7 @@ def shapiro_wilk(data):
         #### step 7: calculate p-value, knowing that ln(1-W) is approximately normally distirbuted
         mu = 0.0038915*(np.log(n)**3) - 0.083751*(np.log(n)**2) - 0.31082*(np.log(n)) - 1.5861
         exponent = 0.0030302*(np.log(n)**2) - 0.082676*(np.log(n)) - 0.4803
-        sigma = exp(exponent)
+        sd = exp(exponent)
 
         #### if W >= 1 protect ouput by making W = 0.99
         #### W >=1 means the data is normal in any case so for user won't change outcome
@@ -126,8 +127,7 @@ def shapiro_wilk(data):
             W = 0.9999
 
         #### calculate z-score and p-value
-        z = (np.log(1-W)-mu)/sigma
-        p = 1-norm.cdf(z)
+        p = 1-norm.cdf(np.log(1-W), mu, sd)
 
         #### append W and p to lists
         shapiro_stats.append(W)

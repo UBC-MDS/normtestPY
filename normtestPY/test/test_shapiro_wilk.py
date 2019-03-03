@@ -20,7 +20,7 @@ from normtestPY.shapiro_wilk import shapiro_wilk
 data_df = pd.DataFrame({'data' : [41.5,38.7,44.5,43.8,46.0,39.4, 40.6, 42.7],
               'data2' : [65,63,86,70,74,35,68,45]})
 data_list1 = [41.5,38.7,44.5,43.8,46.0,39.4, 40.6, 42.7]
-data_list2 = [1, 2, 3]
+data_list2 = [1, 2, 3, 4, 5]
 data_ndarray = np.array([[41.5,38.7,44.5,43.8,46.0,39.4, 40.6, 42.7],
                       [65,63,86,70,74,35,68,45]])
 data_ndarray = data_ndarray.T
