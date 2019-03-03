@@ -32,6 +32,12 @@ def test_params_mle_calc():
     assert np.allclose(params_mle(matrix_type), expected)
     assert np.allclose(params_mle(list_2d_type), expected)
 
+def test_incorrect_input_type():
+    with pytest.raises(TypeError):
+        params_mle("hello")
+    with pytest.raises(TypeError):
+        params_mle(2.4)
+
 def test_output_type():
     assert isinstance(params_mle(dummy), pd.DataFrame)
     assert isinstance(params_mle(matrix_type), pd.DataFrame)
@@ -51,3 +57,8 @@ def test_non_numeric_inputs():
         params_mle(pd.DataFrame({"var1": [1,2,"5","9"]}))
     with pytest.raises(TypeError):
         params_mle([True, False, True])
+
+def test_no_column_names():
+    assert list(params_mle(np.array(dummy["var1"]))) == [0]
+    assert list(params_mle(pd.Series([0,1,1,-1]))) == [0]
+    assert list(params_mle([0,1,1,-1])) == [0]

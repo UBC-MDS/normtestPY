@@ -31,6 +31,7 @@ def make_qqplot(data, print_plots = True):
     if isinstance(data, np.ndarray):
         if len(data.shape) == 1:
             var_names = [0]
+            data = data[:, None]
         else:
             n_var = data.shape[1]
             var_names = range(n_var)
@@ -72,9 +73,9 @@ def make_qqplot(data, print_plots = True):
         ax.scatter(x, y)
         plt.xlabel('Theoretical Distribution')
         plt.ylabel('Sample Distribution')
-        if print_plots:
+        if print_plots == True:
             plt.show()
-        elif not print_plots:
+        elif print_plots == False:
             plt.close()
         else:
             raise TypeError
