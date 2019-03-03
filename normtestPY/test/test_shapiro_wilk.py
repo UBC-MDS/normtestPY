@@ -14,6 +14,7 @@ Assertion errors if tests fail
 import pytest
 import numpy as np
 import pandas as pd
+
 from normtestPY.shapiro_wilk import shapiro_wilk
 
 # Sample data
@@ -36,6 +37,13 @@ def test_output_and_input_type():
     assert type(shapiro_wilk(data_ndarray)) == tuple
     assert type(shapiro_wilk(data_series)) == tuple
 
+def test_bad_inputs_string():
+    """Check that an error is thrown from non-numeric inputs"""
+    try:
+        shapriro_wilk('a',False)
+    except TypeError:
+        return True
+    raise TypeError
 
 def test_output_tuple_length():
     """check that length of output is two since the tuple always has 2 lists in it"""
