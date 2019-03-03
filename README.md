@@ -57,6 +57,12 @@ The package has the following dependencies:
         - columns: variables
         - rows: mean, variance
 
+### Branch Coverage
+We have tests to ensure that are package is workuing as expected and will continue to do so into the future. As you can see, we have close to full branch coverage:
+![](branch_coverage_normtestPY.png)
+
+
+
 ### Where does this fit into the Python ecosystem
 
 The `SciPy.stats` package has a Shapiro-Wilk test function named [`shapiro()`](https://docs.scipy.org/doc/scipy-0.19.1/reference/generated/scipy.stats.shapiro.html), it takes in an array of sample data and returns the test statistic as a float and the p-value as a float and returns both as a tuple. For Q-Q plots in python, there is a package named `statsmodels` and within it - [`statsmodels.graphics.gofplots.qqplot()`](https://www.statsmodels.org/dev/generated/statsmodels.graphics.gofplots.qqplot.html) - there is a function that takes in 1D array data and creates a `matplotlib` figure. It seems that there is no official PIP or Conda package that provides MLE estimation as a standalone method. In the present, MLE operation requires users to write a self-defined function with the help of [`optimize.minimize()`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html) from `SciPy`.
