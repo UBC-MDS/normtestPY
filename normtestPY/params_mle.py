@@ -67,14 +67,13 @@ def params_mle(data):
     # Calculate mu estimates
     try:
         mu = np.divide(np.sum(data, axis = 0), n_obs)
-        assert np.any(mu = np.nan)
+        assert(np.any(np.isnan(mu)) == False)
     except:
         print("Warning: Missing values detected in one or more variables")
         mu = np.divide(np.nansum(data, axis = 0), n_obs)
-        
+
     # Calculate sigma estimates
     variance = np.nansum((data - mu)**2, axis = 0)/n_obs
-    assert np.any(variance != np.nan)
 
     ## Return results
     ## ==============
@@ -82,5 +81,5 @@ def params_mle(data):
 
     return mle_params
 
-dummy = pd.DataFrame({"var1": [0,1,1,-1], "var2": [-1, -1, 0, 1]})
-params_mle([[np.nan, 2, 1, 3], [1,2,3,4]])
+#dummy = pd.DataFrame({"var1": [0,1,1,-1], "var2": [-1, -1, 0, 1]})
+#params_mle([[2, 1, 3], [1,2,3,4]])
