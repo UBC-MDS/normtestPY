@@ -45,7 +45,7 @@ def test_output_type():
     assert isinstance(params_mle(series_type), pd.DataFrame)
 
 def test_empty_inputs():
-    with pytest.raises(ZeroDivisionError):
+    with pytest.raises(FloatingPointError):
         params_mle(pd.DataFrame({"var1": [], "var2": []}))
     with pytest.raises(IndexError):
         params_mle(list())
@@ -55,7 +55,7 @@ def test_non_numeric_inputs():
         params_mle(["male", "female", "male", "female"])
     with pytest.raises(TypeError):
         params_mle(pd.DataFrame({"var1": [1,2,"5","9"]}))
-    with pytest.raises(TypeError):
+    with pytest.raises(ValueError):
         params_mle([True, False, True])
 
 def test_no_column_names():
