@@ -25,12 +25,11 @@ data_list2 = [1, 2, 3, 4, 5,6,7,8]
 data_list3 = [data_list1, data_list2]
 data_list4 = [1, 2, 3]
 data_ndarray = np.array([[41.5,38.7,44.5,43.8,46.0,39.4, 40.6, 42.7],
-                      [65,63,86,70,74,35,68,45]])
-data_ndarray = data_ndarray.T
+                      [65,63,86,70,74,35,68,45]]).T
 data_series1 = pd.Series([41.5,38.7,44.5,43.8,46.0])
 data_series2 = (data_df['data'])
 data_meaningless1 = pd.DataFrame({'a': ["ab", "cd", "ef", "hlp"]})
-data_meaningless2 = pd.DataFrame({'b': ["TRUE", "FALSE", "TRUE", "FALSE"]})
+data_meaningless2 = pd.DataFrame({'b': [True, False, True, False]})
 data_meaningless3 = "hopefully this throws a TypeError"
 
 # Unit Tests
