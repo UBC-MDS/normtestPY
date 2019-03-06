@@ -56,11 +56,19 @@ def params_mle(data):
         data = np.transpose(np.array(data))
 
     else:
-        print("invalid input data type")
+        print("ERROR: invalid input data type")
         raise TypeError
 
     # Retrieve size of data
     n_obs = data.shape[0]
+
+    ## Exception handling
+    ## ==================
+    try:
+        assert data.dtype.kind in ["i", "u", "f", "c"]
+    except:
+        print("ERROR: Incorrect data type; data is not numeric")
+        raise
 
     ## Calculations
     ## =============
@@ -70,11 +78,15 @@ def params_mle(data):
     try:
         mu = np.divide(np.sum(data, axis = 0), n_obs)
         assert(np.any(np.isnan(mu)) == False)
+
     except AssertionError:
         print("WARNING: Missing values detected in one or more variables")
         mu = np.divide(np.nansum(data, axis = 0), n_obs)
     except FloatingPointError:
+        print("ERROR: Division by 0; input data list may be empty")
         raise
+    except TypeError:
+        print("ERROR: Data is not numeric")
 
     # Calculate sigma estimates
     variance = np.nansum((data - mu)**2, axis = 0)/n_obs
@@ -86,4 +98,4 @@ def params_mle(data):
     return mle_params
 
 
-params_mle([])
+params_mle(np.array(["hi", "by"]))
