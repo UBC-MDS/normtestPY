@@ -45,19 +45,17 @@ def shapiro_wilk(data):
         var_names = range(n_var)
         data = np.array(data)
     elif isinstance(data, pd.Series):
-        if data.name is not None:
-            var_names = [data.name]
-        else:
-            var_names = [0]
+        var_names = [0]
         data = np.array(data)
         data = data[:, None]
     elif isinstance(data, list):
         if type(data[0]) in (float,int):
             var_names = [0]
+            data = np.transpose(np.array(data))
+            data = data[:, None]
         else:
             var_names = range(len(data))
-        data = np.array(data)
-        data = data[:, None]
+            data = np.transpose(np.array(data))
     else:
         raise TypeError
 
@@ -121,11 +119,6 @@ def shapiro_wilk(data):
         mu = 0.0038915*(np.log(n)**3) - 0.083751*(np.log(n)**2) - 0.31082*(np.log(n)) - 1.5861
         exponent = 0.0030302*(np.log(n)**2) - 0.082676*(np.log(n)) - 0.4803
         sd = exp(exponent)
-
-        #### if W >= 1 protect ouput by making W = 0.99
-        #### W >=1 means the data is normal in any case so for user won't change outcome
-        if W > 1:
-            W = 0.9999
 
         #### calculate z-score and p-value
         p = 1-norm.cdf(np.log(1-W), mu, sd)
