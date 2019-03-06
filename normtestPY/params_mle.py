@@ -82,11 +82,10 @@ def params_mle(data):
     except AssertionError:
         print("WARNING: Missing values detected in one or more variables")
         mu = np.divide(np.nansum(data, axis = 0), n_obs)
+
     except FloatingPointError:
         print("ERROR: Division by 0; input data list may be empty")
         raise ValueError
-    except TypeError:
-        print("ERROR: Data is not numeric")
 
     # Calculate sigma estimates
     variance = np.nansum((data - mu)**2, axis = 0)/n_obs
@@ -97,3 +96,4 @@ def params_mle(data):
     mle_params = pd.DataFrame(np.vstack((mu, variance)), index = ["Mean", "Variance"], columns = var_names)
 
     return mle_params
+    

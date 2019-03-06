@@ -62,3 +62,7 @@ def test_no_column_names():
     assert list(params_mle(np.array(dummy["var1"]))) == [0]
     assert list(params_mle(pd.Series([0,1,1,-1]))) == [0]
     assert list(params_mle([0,1,1,-1])) == [0]
+
+def test_NA_values():
+    na_test  = params_mle([[1,1,np.nan], [np.nan, 2,3]])
+    assert na_test.isnull().values.any() == False
