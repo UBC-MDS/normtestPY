@@ -68,7 +68,7 @@ def params_mle(data):
         assert data.dtype.kind in ["i", "u", "f", "c"]
     except:
         print("ERROR: Incorrect data type; data is not numeric. \nCheck for string and booleans in data; uneven number \nof values in variable lists")
-        raise
+        raise ValueError
 
     ## Calculations
     ## =============
@@ -84,7 +84,7 @@ def params_mle(data):
         mu = np.divide(np.nansum(data, axis = 0), n_obs)
     except FloatingPointError:
         print("ERROR: Division by 0; input data list may be empty")
-        raise
+        raise ValueError
     except TypeError:
         print("ERROR: Data is not numeric")
 
@@ -97,4 +97,3 @@ def params_mle(data):
     mle_params = pd.DataFrame(np.vstack((mu, variance)), index = ["Mean", "Variance"], columns = var_names)
 
     return mle_params
-params_mle("hi")

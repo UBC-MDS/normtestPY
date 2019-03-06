@@ -51,9 +51,9 @@ def test_empty_inputs():
         params_mle(list())
 
 def test_non_numeric_inputs():
-    with pytest.raises(TypeError):
+    with pytest.raises(ValueError):
         params_mle(["male", "female", "male", "female"])
-    with pytest.raises(TypeError):
+    with pytest.raises(ValueError):
         params_mle(pd.DataFrame({"var1": [1,2,"5","9"]}))
     with pytest.raises(ValueError):
         params_mle([True, False, True])
