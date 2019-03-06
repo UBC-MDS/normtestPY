@@ -28,11 +28,13 @@ def params_mle(data):
 ## =============
 
     # Address different input types
+
     if isinstance(data, np.ndarray):
         if len(data.shape) == 1:
             var_names = [0]
         else:
             var_names = range(data.shape[1])
+        data = data[:,None]
 
     elif isinstance(data, pd.DataFrame):
         var_names = list(data)
@@ -46,35 +48,52 @@ def params_mle(data):
         data = np.array(data)
 
     elif isinstance(data, list):
-        if type(data[0]) in (float,int):
-            var_names = [0]
-        else:
-            var_names = range(len(data))
+        if len(data) != 0:
+            if type(data[0]) in (float,int):
+                var_names = [0]
+            else:
+                var_names = range(len(data))
         data = np.transpose(np.array(data))
 
     else:
-        raise TypeError
+        print("ERROR: invalid input data type")
+        raise TypeError("Invalid input ype")
 
     # Retrieve size of data
     n_obs = data.shape[0]
-    if n_obs == 0:
-        raise ZeroDivisionError
 
-    # Exception handling if array element is not numeric
-    if data.dtype.kind not in ["i", "u", "f", "c"]:
-        raise TypeError
+    ## Exception handling
+    ## ==================
+    try:
+        assert data.dtype.kind in ["i", "u", "f", "c"]
+    except:
+        print("ERROR: Incorrect data type; data is not numeric. \nCheck for string and booleans in data; uneven number \nof values in variable lists")
+        raise ValueError
 
     ## Calculations
     ## =============
+    np.seterr(divide = "raise", invalid = "raise")
 
     # Calculate mu estimates
-    mu = np.sum(np.array(data), axis = 0)/n_obs
+    try:
+        mu = np.divide(np.sum(data, axis = 0), n_obs)
+        assert np.any(np.isnan(mu)) == False
+
+    except AssertionError:
+        print("WARNING: Missing values detected in one or more variables")
+        mu = np.divide(np.nansum(data, axis = 0), n_obs)
+
+    except FloatingPointError:
+        print("ERROR: Division by 0; input data list may be empty")
+        raise ValueError
 
     # Calculate sigma estimates
-    variance = np.sum((data - mu)**2, axis = 0)/n_obs
+    variance = np.nansum((data - mu)**2, axis = 0)/n_obs
+    assert np.all(variance >= 0)
 
     ## Return results
     ## ==============
     mle_params = pd.DataFrame(np.vstack((mu, variance)), index = ["Mean", "Variance"], columns = var_names)
 
     return mle_params
+    
