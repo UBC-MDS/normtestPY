@@ -57,7 +57,7 @@ def params_mle(data):
 
     else:
         print("ERROR: invalid input data type")
-        raise TypeError
+        raise TypeError("Invalid input ype")
 
     # Retrieve size of data
     n_obs = data.shape[0]
@@ -67,7 +67,7 @@ def params_mle(data):
     try:
         assert data.dtype.kind in ["i", "u", "f", "c"]
     except:
-        print("ERROR: Incorrect data type; data is not numeric")
+        print("ERROR: Incorrect data type; data is not numeric. \nCheck for string and booleans in data; uneven number \nof values in variable lists")
         raise
 
     ## Calculations
@@ -77,7 +77,7 @@ def params_mle(data):
     # Calculate mu estimates
     try:
         mu = np.divide(np.sum(data, axis = 0), n_obs)
-        assert(np.any(np.isnan(mu)) == False)
+        assert np.any(np.isnan(mu)) == False
 
     except AssertionError:
         print("WARNING: Missing values detected in one or more variables")
@@ -90,12 +90,11 @@ def params_mle(data):
 
     # Calculate sigma estimates
     variance = np.nansum((data - mu)**2, axis = 0)/n_obs
+    assert np.all(variance >= 0)
 
     ## Return results
     ## ==============
     mle_params = pd.DataFrame(np.vstack((mu, variance)), index = ["Mean", "Variance"], columns = var_names)
 
     return mle_params
-
-
-params_mle(np.array(["hi", "by"]))
+params_mle("hi")
