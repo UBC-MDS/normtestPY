@@ -68,22 +68,29 @@ def params_mle(data):
     ## Exception handling
     ## ==================
     try:
+        assert data.shape[0] != 0
+    except:
+        print("ERROR: Empty dataset")
+        raise ValueError
+
+    try:
         assert isinstance(data[0], list) == False
     except:
         print("WARNING: Uneven number of values in variables")
         data = list(data)
-        n_obs = [len(var) for var in data]
+        n_list = [len(i) for i in data]
         for var in data:
-            while len(var) < max(n_obs):
-                var.append(0)
+            while len(var) < max(n_list):
+                var.append(np.nan)
         data = np.transpose(np.array(data))
+        n_obs = np.repeat(data.shape[0], data.shape[1])
 
     try:
         assert data.dtype.kind in ["i", "u", "f", "c"]
     except AssertionError:
-        print("ERROR: Incorrect data type; data is not numeric. \nCheck for string and booleans in data; uneven number \nof values in variable lists")
+        print("ERROR: Incorrect data type; data is not numeric. \nCheck for string and booleans in data.")
         raise ValueError
-
+        
     try:
         assert(np.any(np.isnan(data)) == False)
     except AssertionError:
@@ -96,12 +103,8 @@ def params_mle(data):
     np.seterr(divide = "raise", invalid = "raise")
 
     # Calculate mu estimates
-    try:
-        mu = np.divide(np.sum(data, axis = 0), n_obs)
-
-    except FloatingPointError:
-        print("ERROR: Division by 0; input data list may be empty")
-        raise ValueError
+    mu = np.divide(np.nansum(data, axis = 0), n_obs)
+    print(np.nansum(data, axis = 0))
 
     # Calculate sigma estimates
     variance = np.divide(np.nansum((data - mu)**2, axis = 0), n_obs)
