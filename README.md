@@ -21,7 +21,15 @@ from normtestPY.shapiro_wilk import shapiro_wilk
 from normtestPY.make_qqplot import make_qqplot
 
 data = [1,2,3,20] # Very simple example of a very non-normal dataset
+
+params_mle(data) # Returns a dataframe with the MLE mean and variance if the data was normal
+
+shapiro_wilk(data) # Returns a tuple with the Shapiro statistic and the p-value
+
+make_qqplot(data) # Returns a Q-Q plot to check for normality
 ```
+
+Here is the output you get when you run the above code:
 ![](example_usage.png)
 
 
