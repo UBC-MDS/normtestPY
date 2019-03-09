@@ -66,3 +66,6 @@ def test_no_column_names():
 def test_NA_values():
     na_test  = params_mle([[1,1,np.nan], [np.nan, 2,3]])
     assert na_test.isnull().values.any() == False
+
+def test_unequal_list_length():
+    assert np.allclose(params_mle([[0,1,1,-1], [-1, -1, 0, 1, np.nan, np.nan]]), expected)
