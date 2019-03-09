@@ -49,6 +49,10 @@ def make_qqplot(data, print_plots = True):
         data = data[:, None]
 
     elif isinstance(data, list):
+        try:
+            assert len(data) > 0
+        except AssertionError:
+            raise ValueError("ERROR: Empty dataset")
         if type(data[0]) in (float,int):
             var_names = [0]
         else:
@@ -57,7 +61,8 @@ def make_qqplot(data, print_plots = True):
         data = data[:,None]
 
     else:
-        raise TypeError
+        raise TypeError("ERROR: invalid input data type")
+
 
     # Exception handling if array element is not numeric
     if data.dtype.kind not in ["i", "u", "f", "c"]:
@@ -73,12 +78,15 @@ def make_qqplot(data, print_plots = True):
         ax.scatter(x, y)
         plt.xlabel('Theoretical Distribution')
         plt.ylabel('Sample Distribution')
-        if print_plots == True:
+        try:
+            assert type(print_plots) == bool
+        except AssertionError:
+            raise TypeError('ERROR: need to specify a boolean for print_plots')
+        if print_plots:
             plt.show()
-        elif print_plots == False:
-            plt.close()
         else:
-            raise TypeError
+            plt.close()
         plots[var_names[n]] = fig
 
     return plots
+
