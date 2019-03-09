@@ -63,6 +63,14 @@ def test_var_length_list():
     plots = make_qqplot(data,print_plots=False)
     assert len(plots.keys()) == 1
 
+def test_empty_dataset():
+    """Check that length of dict == 1 when passed list."""
+    try:
+        plots = make_qqplot([],print_plots=False)
+    except ValueError:
+        return True
+    raise TypeError
+
 def test_var_length_list_of_lists():
     """Check that length of dict <= number of lists when passed a list of lists."""
     plots = make_qqplot(data_lists,print_plots=False)
