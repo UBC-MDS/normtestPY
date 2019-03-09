@@ -32,6 +32,8 @@ data_series2 = (data_df['data'])
 data_meaningless1 = pd.DataFrame({'a': ["ab", "cd", "ef", "hlp"]})
 data_meaningless2 = pd.DataFrame({'b': ["TRUE", "FALSE", "TRUE", "FALSE"]})
 data_meaningless3 = "hopefully this throws a TypeError"
+data_meaningless4 = pd.DataFrame()
+data_meaningless5 = [[1,1,np.nan], [np.nan, 2,3]]
 
 # Unit Tests
 def test_output_and_input_type():
@@ -50,7 +52,6 @@ def test_output_tuple_length():
     stats = shapiro_wilk(data_df)
     assert len(stats) == 2
 
-
 def test_output_list_length():
     """check that the length of the first list is as <= amount of columns in pd.dataframe"""
     stats_1 = shapiro_wilk(data_df)[0]
@@ -63,12 +64,16 @@ def test_output_lists_equal():
 
 def test_meaningless_input():
     """check that meaningless input isn't prcoessed"""
-    with pytest.raises(TypeError):
+    with pytest.raises(ValueError):
         shapiro_wilk(data_meaningless1)
-    with pytest.raises(TypeError):
+    with pytest.raises(ValueError):
         shapiro_wilk(data_meaningless2)
     with pytest.raises(TypeError):
         shapiro_wilk(data_meaningless3)
+    with pytest.raises(ValueError):
+        shapiro_wilk(data_meaningless4)
+    with pytest.raises(ValueError):
+        shapiro_wilk(data_meaningless5)
 
 def test_wrong_range():
     small_list = np.random.normal(5, 2, 3)

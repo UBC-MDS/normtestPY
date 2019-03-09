@@ -57,11 +57,27 @@ def shapiro_wilk(data):
             var_names = range(len(data))
             data = np.transpose(np.array(data))
     else:
-        raise TypeError
+        print("ERROR: invalid input data type")
+        raise TypeError("Invalid input type")
 
-    # Exception handling if array element is not numeric
-    if data.dtype.kind not in ["i", "u", "f", "c"]:
-        raise TypeError
+    ## EXCEPTION handling
+    ## ==================
+    try:
+        assert data.shape[0] != 0
+    except:
+        print("ERROR: Empty dataset")
+        raise ValueError
+
+    try:
+        assert data.dtype.kind in ["i", "u", "f", "c"]
+    except AssertionError:
+        print("ERROR: Incorrect data type; data is not numeric. Check for string and booleans in data.")
+        raise ValueError
+    try:
+        assert(np.any(np.isnan(data)) == False)
+    except AssertionError:
+        print("ERROR: Missing values detected in one or more variables, calculations cannot be done with missing values")
+        raise ValueError
 
     # create lists to be returned
     shapiro_stats = list()
