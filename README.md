@@ -4,6 +4,8 @@ Contributors: Constantin Shuster, Sylvia Lee, Richie Zitomer
 
 This is a Python package that tests your data for normality!
 
+[![Build Status](https://travis-ci.org/UBC-MDS/normtestPY.svg?branch=master)](https://travis-ci.org/UBC-MDS/normtestPY)
+
 ### Overview    
 A common and important assumption that made by many parametric statistical methods (t-tests, ANOVA and linear regression) is that the dependent variable (response variable) is normally distributed across all categories of the independent variables (predictors). Thus testing for normality in the data is an important step before applying parametric statistical methods.
 
